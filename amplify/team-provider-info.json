@@ -15,8 +15,17 @@
       "function": {
         "ppedetector": {
           "deploymentBucketName": "amplify-ppedetector-dev-235958-deployment",
-          "s3Key": "amplify-builds/ppedetector-4c647776435277797136-build.zip"
+          "s3Key": "amplify-builds/ppedetector-6b4e46504e69514e7876-build.zip"
         }
+      },
+      "auth": {
+        "ppedetector68af830f": {}
+      },
+      "storage": {
+        "ppedetector": {}
+      },
+      "api": {
+        "ppedetector": {}
       }
     }
   }

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Image, Alert } from "react-bootstrap";
 
-import { Storage } from "aws-amplify";
+import { Storage, API } from "aws-amplify";
 
 function Home(props) {
   const [imageUrl, setImageUrl] = useState(null);
   const [selectedFile, setSelectedFile] = useState([]);
+  const [ppeDetected, setPPEDetected] = useState([]);
 
   const onSelectFile = async (e) => {
     e.preventDefault();
@@ -23,11 +24,24 @@ function Home(props) {
         },
       });
       console.log("File Uploaded Successfully ");
+      await detectPPE();
     } catch (error) {
       console.log("Error uploading file: ", error);
     }
   };
 
+  const detectPPE = async (s3key) => {
+    API.get("ppedetector", "/ppedetect", {
+      headers: { "Content-Type": "text/plain" },
+    })
+      .then((response) => {
+        console.log(response);
+        // Add your code here
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
   return (
     <Container>
       <div style={{ marginTop: "7%" }}>
@@ -72,7 +86,13 @@ function Home(props) {
           className="justify-content-md-center mt-10"
         >
           <Col lg={6} className="text-center">
-            <Alert variant={"success"}>Head Cover Detected</Alert>
+            <>
+              {ppeDetected.map((obj) => (
+                <Alert key={obj} variant={"success"}>
+                  {obj}
+                </Alert>
+              ))}
+            </>
           </Col>
         </Row>
       </div>
