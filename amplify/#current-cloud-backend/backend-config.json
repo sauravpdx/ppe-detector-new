@@ -33,28 +33,5 @@
       "providerPlugin": "awscloudformation",
       "dependsOn": []
     }
-  },
-  "function": {
-    "ppedetector": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  },
-  "api": {
-    "pperest": {
-      "service": "API Gateway",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "ppedetector",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
-        }
-      ]
-    }
   }
 }

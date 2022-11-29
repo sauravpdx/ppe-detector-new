@@ -239,38 +239,6 @@
         }
       }
     },
-    "functionppedetector": {
-      "Type": "AWS::CloudFormation::Stack",
-      "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-ppedetector-dev-235958-deployment/amplify-cfn-templates/function/ppedetector-cloudformation-template.json",
-        "Parameters": {
-          "deploymentBucketName": "amplify-ppedetector-dev-235958-deployment",
-          "s3Key": "amplify-builds/ppedetector-303039624f574a383148-build.zip",
-          "env": "dev"
-        }
-      }
-    },
-    "apipperest": {
-      "Type": "AWS::CloudFormation::Stack",
-      "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-ppedetector-dev-235958-deployment/amplify-cfn-templates/api/pperest-cloudformation-template.json",
-        "Parameters": {
-          "functionppedetectorName": {
-            "Fn::GetAtt": [
-              "functionppedetector",
-              "Outputs.Name"
-            ]
-          },
-          "functionppedetectorArn": {
-            "Fn::GetAtt": [
-              "functionppedetector",
-              "Outputs.Arn"
-            ]
-          },
-          "env": "dev"
-        }
-      }
-    },
     "UpdateRolesWithIDPFunction": {
       "DependsOn": [
         "AuthRole",
