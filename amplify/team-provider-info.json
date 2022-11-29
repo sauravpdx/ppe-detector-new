@@ -10,6 +10,23 @@
       "StackName": "amplify-ppedetector-dev-235958",
       "StackId": "arn:aws:cloudformation:us-east-1:250012449731:stack/amplify-ppedetector-dev-235958/d74ab380-7013-11ed-a187-12a2d990fc6b",
       "AmplifyAppId": "dx26wen16nrwi"
+    },
+    "categories": {
+      "function": {
+        "ppedetector": {
+          "deploymentBucketName": "amplify-ppedetector-dev-235958-deployment",
+          "s3Key": "amplify-builds/ppedetector-6b4e46504e69514e7876-build.zip"
+        }
+      },
+      "auth": {
+        "ppedetector68af830f": {}
+      },
+      "storage": {
+        "ppedetector": {}
+      },
+      "api": {
+        "ppedetector": {}
+      }
     }
   }
 }

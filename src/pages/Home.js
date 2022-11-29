@@ -1,10 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Image, Alert } from "react-bootstrap";
 
+import { Storage, API } from "aws-amplify";
+
 function Home(props) {
+  const [imageUrl, setImageUrl] = useState(null);
+  const [selectedFile, setSelectedFile] = useState([]);
+  const [ppeDetected, setPPEDetected] = useState([]);
+
   const onSelectFile = async (e) => {
     e.preventDefault();
     console.log(e.target.files);
+    setSelectedFile(e.target.files[0]);
+    setImageUrl(URL.createObjectURL(e.target.files[0]));
+    uploadFile(e.target.files[0]);
+  };
+
+  const uploadFile = async (file) => {
+    try {
+      await Storage.put(file.name, file, {
+        progressCallback(progress) {
+          console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+        },
+      });
+      console.log("File Uploaded Successfully ");
+      await detectPPE();
+    } catch (error) {
+      console.log("Error uploading file: ", error);
+    }
+  };
+
+  const detectPPE = async (s3key) => {
+    API.get("ppedetector", "/ppedetect", {
+      headers: { "Content-Type": "text/plain" },
+    })
+      .then((response) => {
+        console.log(response);
+        // Add your code here
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
   };
   return (
     <Container>
@@ -34,13 +70,15 @@ function Home(props) {
         </Row>
         <Row className="justify-content-md-center mt-10">
           <Col lg={6} className="text-center">
-            <Image
-              class="mx-auto d-block"
-              width={400}
-              height={400}
-              src="https://picsum.photos/200/200"
-              rounded
-            />
+            {imageUrl && (
+              <Image
+                class="mx-auto d-block"
+                width={400}
+                height={400}
+                src={imageUrl}
+                rounded
+              />
+            )}
           </Col>
         </Row>
         <Row
@@ -48,7 +86,13 @@ function Home(props) {
           className="justify-content-md-center mt-10"
         >
           <Col lg={6} className="text-center">
-            <Alert variant={"success"}>Head Cover Detected</Alert>
+            <>
+              {ppeDetected.map((obj) => (
+                <Alert key={obj} variant={"success"}>
+                  {obj}
+                </Alert>
+              ))}
+            </>
           </Col>
         </Row>
       </div>
