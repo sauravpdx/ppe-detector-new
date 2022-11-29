@@ -8,9 +8,6 @@ function App() {
     <div>
       <AppNavbar />
       <AppRoutes />
-      {/* <ReactTooltip />
-    <AppRoutes />
-    <NotificationContainer /> */}
     </div>
   );
 }
