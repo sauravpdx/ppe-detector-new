@@ -12,14 +12,11 @@
       "AmplifyAppId": "dx26wen16nrwi"
     },
     "categories": {
-      "auth": {
-        "ppedetector26c7bbed": {}
-      },
-      "storage": {
-        "s3abf45b25": {}
-      },
       "function": {
-        "ppedetector": {}
+        "ppedetector": {
+          "deploymentBucketName": "amplify-ppedetector-dev-235958-deployment",
+          "s3Key": "amplify-builds/ppedetector-4c647776435277797136-build.zip"
+        }
       }
     }
   }

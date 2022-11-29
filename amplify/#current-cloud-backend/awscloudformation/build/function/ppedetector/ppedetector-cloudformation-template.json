@@ -89,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "ppedetectorLambdaRolee826a63d",
+            "ppedetectorLambdaRole5cc5dcef",
             {
               "Fn::Join": [
                 "",
                 [
-                  "ppedetectorLambdaRolee826a63d",
+                  "ppedetectorLambdaRole5cc5dcef",
                   "-",
                   {
                     "Ref": "env"

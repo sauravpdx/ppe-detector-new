@@ -1,9 +1,19 @@
 import json
+import boto3
+
+def detect_labels(photo = "test.png", bucket="test-rekognit"):
+
+    client=boto3.client('rekognition')
+
+    response = client.detect_protective_equipment(Image={'S3Object':{'Bucket':bucket,'Name':photo}})
+    return response
 
 def handler(event, context):
+    
   print('received event:')
   print(event)
-  
+  resp = detect_labels()
+
   return {
       'statusCode': 200,
       'headers': {
@@ -11,5 +21,5 @@ def handler(event, context):
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
       },
-      'body': json.dumps('Hello from your new Amplify Python lambda!')
+      'body': resp
   }
