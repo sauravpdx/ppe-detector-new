@@ -1,0 +1,15 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-ppedetector-dev-235958-authRole",
+      "UnauthRoleArn": "arn:aws:iam::250012449731:role/amplify-ppedetector-dev-235958-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::250012449731:role/amplify-ppedetector-dev-235958-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-ppedetector-dev-235958-deployment",
+      "UnauthRoleName": "amplify-ppedetector-dev-235958-unauthRole",
+      "StackName": "amplify-ppedetector-dev-235958",
+      "StackId": "arn:aws:cloudformation:us-east-1:250012449731:stack/amplify-ppedetector-dev-235958/d74ab380-7013-11ed-a187-12a2d990fc6b",
+      "AmplifyAppId": "dx26wen16nrwi"
+    }
+  }
+}
