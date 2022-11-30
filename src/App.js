@@ -6,6 +6,8 @@ import AppFooter from "./components/AppFooter";
 
 import { Amplify } from "aws-amplify";
 import awsconfig from "../src/aws-exports";
+import NotificationContainer from "react-notifications/lib/NotificationContainer";
+import "react-notifications/lib/notifications.css";
 Amplify.configure(awsconfig);
 
 function App() {
@@ -14,6 +16,7 @@ function App() {
       <AppNavbar />
       <AppRoutes />
       <AppFooter />
+      <NotificationContainer />
     </div>
   );
 }

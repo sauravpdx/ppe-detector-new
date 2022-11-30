@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Form, Image, Alert } from "react-bootstrap";
-
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Image,
+  Alert,
+  ProgressBar,
+} from "react-bootstrap";
+import { NotificationManager } from "react-notifications";
 import { Storage, API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../graphql/mutations";
 
@@ -8,9 +16,10 @@ function Home(props) {
   const [imageUrl, setImageUrl] = useState(null);
   const [selectedFile, setSelectedFile] = useState([]);
   const [ppeDetected, setPPEDetected] = useState([]);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   // useEffect(() => {
-  //   detectPPE();
+
   // });
 
   const onSelectFile = async (e) => {
@@ -23,26 +32,30 @@ function Home(props) {
 
   const uploadFile = async (file) => {
     try {
+      NotificationManager.info("File Upload Started", "Info", 5000);
       await Storage.put("test.png", file, {
         progressCallback(progress) {
-          console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
+          setUploadProgress(progress.loaded / progress.total);
+          // console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
         },
       });
+      NotificationManager.success("File Upload Successfully", "Success", 5000);
       console.log("File Uploaded Successfully ");
       await detectPPE();
     } catch (error) {
       console.log("Error uploading file: ", error);
+      NotificationManager.warning("Error uploading file", "Warning", 5000);
     }
   };
 
   const detectPPE = async (s3key) => {
+    NotificationManager.info("Now Detecting PPE", "Info", 5000);
     const resp = await API.graphql(
       graphqlOperation(mutations.ppedetector, {
         key: "test.png",
       })
     );
     var data = JSON.parse(resp.data.ppedetector);
-    console.log(data["body"]["Persons"]);
     setPPEDetected(data["body"]["Persons"]);
   };
 
@@ -82,13 +95,25 @@ function Home(props) {
         <Row className="justify-content-md-center mt-10">
           <Col lg={6} className="text-center">
             {imageUrl && (
-              <Image
-                class="mx-auto d-block"
-                width={400}
-                height={400}
-                src={imageUrl}
-                rounded
-              />
+              <>
+                <Image
+                  class="mx-auto d-block"
+                  width={400}
+                  height={400}
+                  src={imageUrl}
+                  rounded
+                />
+              </>
+            )}
+            {uploadProgress * 100 > 0 && uploadProgress * 100 < 99 && (
+              <div style={{ margin: "20px" }}>
+                <p>Uploading {(uploadProgress * 100).toFixed(2)} %</p>
+                <ProgressBar
+                  striped
+                  variant="success"
+                  now={uploadProgress * 100}
+                />
+              </div>
             )}
           </Col>
         </Row>
@@ -98,6 +123,7 @@ function Home(props) {
         >
           <Col lg={6} className="text-center">
             <>
+              {ppeDetected.length > 0 && <p>PPE Present in</p>}
               {ppeDetected.map(
                 (obj) =>
                   // <Alert key={obj} variant={"primary"}>
