@@ -25,14 +25,17 @@ function Contact(props) {
     <Container>
       <div style={{ marginTop: "7%" }}>
         {" "}
-        <Row className="mb-4 text-center">
+        <Row
+          className="mb-4 text-center"
+          style={{ backgroundColor: "#c7c7c7" }}
+        >
           <h1 style={{ alignText: "center" }}>
             <u>DEVELOPERS</u>
           </h1>
         </Row>
         <br></br>
         <Row className="mb-4 text-center">
-          <Col>
+          <Col style={{ backgroundColor: "#c7c7c7" }}>
             <h3 style={{ alignText: "center" }}>PRACHI KASHYAP</h3>
             <h5>PORTLAND STATE UNIVERSITY</h5>
             <h6>Master's in Computer Science</h6>
@@ -40,7 +43,7 @@ function Contact(props) {
             <br></br>
             <a href="https://www.linkedin.com/in/prachikashyap/">LINKEDIN</a>
           </Col>
-          <Col>
+          <Col style={{ backgroundColor: "#c7c7c7" }}>
             <h3 style={{ alignText: "center" }}>SAURAV KUMAR SINGH</h3>
             <h5>PORTLAND STATE UNIVERSITY</h5>
             <h6>Master's in Computer Science</h6>
@@ -54,7 +57,7 @@ function Contact(props) {
         <br></br>
         <Row className="mb-5 text-center">
           <Col></Col>
-          <Col style={{ border: "solid" }}>
+          <Col style={{ border: "solid", backgroundColor: "#c7c7c7" }}>
             <div
               style={{
                 alignText: "center",
