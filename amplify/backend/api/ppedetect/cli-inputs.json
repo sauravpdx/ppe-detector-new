@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "paths": {
+    "/ppedetect": {
+      "name": "/ppedetect",
+      "lambdaFunction": "ppedetector",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/": {
+      "name": "/",
+      "lambdaFunction": "ppedetector",
+      "permissions": {
+        "setting": "protected",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ],
+        "guest": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    }
+  }
+}

@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Image, Alert } from "react-bootstrap";
 
-import { Storage, API } from "aws-amplify";
+import { Storage, API, graphqlOperation } from "aws-amplify";
+import * as mutations from "../graphql/mutations";
 
 function Home(props) {
   const [imageUrl, setImageUrl] = useState(null);
   const [selectedFile, setSelectedFile] = useState([]);
   const [ppeDetected, setPPEDetected] = useState([]);
+
+  // useEffect(() => {
+  //   detectPPE();
+  // });
 
   const onSelectFile = async (e) => {
     e.preventDefault();
@@ -18,7 +23,7 @@ function Home(props) {
 
   const uploadFile = async (file) => {
     try {
-      await Storage.put(file.name, file, {
+      await Storage.put("test.png", file, {
         progressCallback(progress) {
           console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
         },
@@ -31,16 +36,31 @@ function Home(props) {
   };
 
   const detectPPE = async (s3key) => {
-    API.get("ppedetector", "/ppedetect", {
-      headers: { "Content-Type": "text/plain" },
-    })
-      .then((response) => {
-        console.log(response);
-        // Add your code here
+    const resp = await API.graphql(
+      graphqlOperation(mutations.ppedetector, {
+        key: "test.png",
       })
-      .catch((error) => {
-        console.log(error.response);
-      });
+    );
+    var data = JSON.parse(resp.data.ppedetector);
+    console.log(data["body"]["Persons"]);
+    setPPEDetected(data["body"]["Persons"]);
+    // fetch("https://f8rtde00da.execute-api.us-east-1.amazonaws.com/dev")
+    //   .then((res) => res.json())
+    //   .then((json) => {
+    //     console.log(json);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    // // };
+    // API.get("ppedetect", "/ppedetect")
+    //   .then((response) => {
+    //     console.log(response);
+    //     // Add your code here
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
   return (
     <Container>
@@ -87,11 +107,15 @@ function Home(props) {
         >
           <Col lg={6} className="text-center">
             <>
-              {ppeDetected.map((obj) => (
-                <Alert key={obj} variant={"success"}>
-                  {obj}
-                </Alert>
-              ))}
+              {ppeDetected.map((obj) =>
+                // <Alert key={obj} variant={"primary"}>
+                obj["BodyParts"].map((obj1) => (
+                  <Alert key={obj1} variant={"success"}>
+                    {obj1["Name"]}
+                  </Alert>
+                ))
+                // </Alert>
+              )}
             </>
           </Col>
         </Row>

@@ -26,10 +26,15 @@ export type AmplifyDependentResourcesAttributes = {
         }
     },
     "api": {
-        "ppedetector": {
+        "ppedetect": {
             "RootUrl": "string",
             "ApiName": "string",
             "ApiId": "string"
+        },
+        "ppedetector": {
+            "GraphQLAPIKeyOutput": "string",
+            "GraphQLAPIIdOutput": "string",
+            "GraphQLAPIEndpointOutput": "string"
         }
     }
 }

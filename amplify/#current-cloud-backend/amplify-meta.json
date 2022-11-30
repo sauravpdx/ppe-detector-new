@@ -9,7 +9,8 @@
       "UnauthRoleName": "amplify-ppedetector-dev-235958-unauthRole",
       "StackName": "amplify-ppedetector-dev-235958",
       "StackId": "arn:aws:cloudformation:us-east-1:250012449731:stack/amplify-ppedetector-dev-235958/d74ab380-7013-11ed-a187-12a2d990fc6b",
-      "AmplifyAppId": "dx26wen16nrwi"
+      "AmplifyAppId": "dx26wen16nrwi",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-ppedetector-dev-235958-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     }
   },
   "function": {
@@ -17,10 +18,10 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
-      "lastDevBuildTimeStamp": "2022-11-29T21:21:48.043Z",
-      "lastBuildType": "PROD",
-      "lastBuildTimeStamp": "2022-11-29T21:44:04.500Z",
-      "lastPackageTimeStamp": "2022-11-29T21:44:11.343Z",
+      "lastDevBuildTimeStamp": "2022-11-30T04:26:50.469Z",
+      "lastBuildType": "DEV",
+      "lastBuildTimeStamp": "2022-11-29T22:29:19.654Z",
+      "lastPackageTimeStamp": "2022-11-29T22:29:25.634Z",
       "distZipFilename": "ppedetector-6b4e46504e69514e7876-build.zip",
       "s3Bucket": {
         "deploymentBucketName": "amplify-ppedetector-dev-235958-deployment",
@@ -30,7 +31,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ppedetector-dev-235958-deployment/amplify-cfn-templates/function/ppedetector-cloudformation-template.json",
         "logicalId": "functionppedetector"
       },
-      "lastPushTimeStamp": "2022-11-29T21:45:47.695Z",
+      "lastPushTimeStamp": "2022-11-30T06:40:58.847Z",
       "output": {
         "Region": "us-east-1",
         "Arn": "arn:aws:lambda:us-east-1:250012449731:function:ppedetector-dev",
@@ -70,7 +71,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ppedetector-dev-235958-deployment/amplify-cfn-templates/auth/ppedetector68af830f-cloudformation-template.json",
         "logicalId": "authppedetector68af830f"
       },
-      "lastPushTimeStamp": "2022-11-29T21:45:46.453Z",
+      "lastPushTimeStamp": "2022-11-30T06:40:58.850Z",
       "output": {
         "CreatedSNSRole": "arn:aws:iam::250012449731:role/sns68af830f235958-dev",
         "UserPoolId": "us-east-1_M4zttBD5W",
@@ -89,7 +90,7 @@
       "service": "S3",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
-      "lastPushTimeStamp": "2022-11-29T21:45:46.457Z",
+      "lastPushTimeStamp": "2022-11-30T06:40:58.852Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ppedetector-dev-235958-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
         "logicalId": "storageppedetector"
@@ -102,7 +103,7 @@
     }
   },
   "api": {
-    "ppedetector": {
+    "ppedetect": {
       "service": "API Gateway",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
@@ -116,16 +117,43 @@
         }
       ],
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-ppedetector-dev-235958-deployment/amplify-cfn-templates/api/ppedetector-cloudformation-template.json",
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-ppedetector-dev-235958-deployment/amplify-cfn-templates/api/ppedetect-cloudformation-template.json",
+        "logicalId": "apippedetect"
+      },
+      "lastPushTimeStamp": "2022-11-30T06:40:58.855Z",
+      "output": {
+        "ApiName": "ppedetect",
+        "RootUrl": "https://f8rtde00da.execute-api.us-east-1.amazonaws.com/dev",
+        "ApiId": "f8rtde00da"
+      },
+      "lastPushDirHash": "3npr021TBz5K45zFlw8ClFVggZM="
+    },
+    "ppedetector": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 365,
+              "apiKeyExpirationDate": "2023-11-30T06:36:54.372Z",
+              "description": "tesy"
+            }
+          },
+          "additionalAuthenticationProviders": []
+        },
+        "GraphQLAPIIdOutput": "ogrzby3vsjdodboyyiey4nqa6y",
+        "GraphQLAPIEndpointOutput": "https://iiebpksysncyljoey27m4doyvq.appsync-api.us-east-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-572gfz672zei3mkvw6dmq3rzee"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-ppedetector-dev-235958-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apippedetector"
       },
-      "lastPushTimeStamp": "2022-11-29T21:45:46.460Z",
-      "output": {
-        "ApiName": "ppedetector",
-        "RootUrl": "https://oak3gfiirh.execute-api.us-east-1.amazonaws.com/dev",
-        "ApiId": "oak3gfiirh"
-      },
-      "lastPushDirHash": "Z79M54sQI6O3CxjpinwCmHnXe0g="
+      "lastPushTimeStamp": "2022-11-30T06:41:00.488Z",
+      "lastPushDirHash": "GV0ER1eCmGC7XFj52jqBSYcoxgI="
     }
   }
 }

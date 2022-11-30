@@ -1,12 +1,15 @@
 {
   "version": 1,
-  "paths": {
-    "/ppedetect": {
-      "name": "/ppedetect",
-      "lambdaFunction": "ppedetector",
-      "permissions": {
-        "setting": "open"
-      }
-    }
+  "serviceConfiguration": {
+    "apiName": "ppedetector",
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 365,
+      "apiKeyExpirationDate": "2023-11-30T06:36:54.372Z",
+      "keyDescription": "tesy"
+    },
+    "conflictResolution": {},
+    "additionalAuthTypes": []
   }
 }
