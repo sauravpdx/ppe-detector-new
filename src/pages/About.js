@@ -10,37 +10,47 @@ import image5 from "./Images/image5.jpeg";
 function About(props) {
   return (
     <Container>
-      <div style={{ marginTop: "7%" }}>
-        {" "}
+      <div style={{ marginTop: "8%", marginBottom: "8%" }}>
         <Row className="mb-4 text-center">
           <h1 style={{ alignText: "center" }}>
             <u>ABOUT</u>
           </h1>
-          <h4>
-            {" "}
+          <h5 style={{ fontfamily: "Roboto" }}>
             Our goal is to detect people wearing Personal Protective Equipment
             (PPE) in an image. This knowledge can help you increase workplace
             safety procedures. PPE detection, for instance, can be used to check
             whether construction workers are wearing head coverings or whether
             medical staff members are donning face and hand covers. Some of the
             PPE categories that can be recognized are shown in the next image.
-          </h4>
+          </h5>
         </Row>
+        <br></br>
         <Row className="mb-4 text-center">
-          <h1 style={{ alignText: "center" }}>
+          <h2 style={{ alignText: "center" }}>
             <u>REFERENCES</u>
-          </h1>
-          <h4>
-            {" "}
+          </h2>
+          <h5>
             <a href="https://github.com/sauravpdx/ppe-detector-new">
               PROJECT GITHUB
             </a>
-          </h4>
+            <br></br>
+            <a href="https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html">
+              Amazon Rekognition
+            </a>
+            <br></br>
+            <a href="https://www.geeksforgeeks.org/reactjs-tutorials/">React</a>
+            <br></br>
+            <a href="https://www.w3schools.com/bootstrap4/">Bootstrap</a>
+            <br></br>
+            <a href="https://dashboard.emailjs.com/admin">emailjs</a>
+            <br></br>
+          </h5>
         </Row>
+        <br></br>
         <Row className="mb-4 text-center">
-          <h1 style={{ alignText: "center" }}>
-            <u>RELATED IMAGES</u>
-          </h1>
+          <h2 style={{ alignText: "center" }}>
+            <u>IMAGES</u>
+          </h2>
         </Row>
         <Row>
           <Carousel>
