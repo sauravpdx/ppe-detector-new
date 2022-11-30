@@ -30,11 +30,13 @@ const awsmobile = {
     "aws_user_files_s3_bucket_region": "us-east-1",
     "aws_cloud_logic_custom": [
         {
-            "name": "ppedetector",
-            "endpoint": "https://oak3gfiirh.execute-api.us-east-1.amazonaws.com/dev",
+            "name": "ppedetect",
+            "endpoint": "https://f8rtde00da.execute-api.us-east-1.amazonaws.com/dev",
             "region": "us-east-1"
         }
-    ]
+    ],
+    "aws_appsync_region": "us-east-1",
+    "aws_appsync_authenticationType": "API_KEY"
 };
 
 

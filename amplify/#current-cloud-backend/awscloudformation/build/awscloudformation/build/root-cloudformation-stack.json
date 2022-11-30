@@ -152,6 +152,27 @@
         }
       }
     },
+    "APIGatewayAuthStack": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-ppedetector-dev-235958-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json",
+        "Parameters": {
+          "authRoleName": {
+            "Ref": "AuthRoleName"
+          },
+          "unauthRoleName": {
+            "Ref": "UnauthRoleName"
+          },
+          "env": "dev",
+          "ppedetect": {
+            "Fn::GetAtt": [
+              "apippedetect",
+              "Outputs.ApiId"
+            ]
+          }
+        }
+      }
+    },
     "functionppedetector": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
@@ -250,10 +271,10 @@
         }
       }
     },
-    "apippedetector": {
+    "apippedetect": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-ppedetector-dev-235958-deployment/amplify-cfn-templates/api/ppedetector-cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-ppedetector-dev-235958-deployment/amplify-cfn-templates/api/ppedetect-cloudformation-template.json",
         "Parameters": {
           "functionppedetectorName": {
             "Fn::GetAtt": [
@@ -267,6 +288,20 @@
               "Outputs.Arn"
             ]
           },
+          "env": "dev"
+        }
+      }
+    },
+    "apippedetector": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-ppedetector-dev-235958-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "Parameters": {
+          "AppSyncApiName": "ppedetector",
+          "DynamoDBBillingMode": "PAY_PER_REQUEST",
+          "DynamoDBEnableServerSideEncryption": false,
+          "S3DeploymentBucket": "amplify-ppedetector-dev-235958-deployment",
+          "S3DeploymentRootKey": "amplify-appsync-files/4c27439b0acf78e80615a8edac801a6c04c2ff5f",
           "env": "dev"
         }
       }

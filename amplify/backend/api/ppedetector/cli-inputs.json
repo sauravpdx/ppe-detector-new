@@ -1,12 +1,11 @@
 {
   "version": 1,
-  "paths": {
-    "/ppedetect": {
-      "name": "/ppedetect",
-      "lambdaFunction": "ppedetector",
-      "permissions": {
-        "setting": "open"
-      }
+  "serviceConfiguration": {
+    "apiName": "ppedetector",
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 7
     }
   }
 }
