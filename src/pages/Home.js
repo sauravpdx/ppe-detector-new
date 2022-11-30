@@ -107,15 +107,15 @@ function Home(props) {
         >
           <Col lg={6} className="text-center">
             <>
-              {ppeDetected.map((obj) => (
-                <Alert key={obj} variant={"primary"}>
-                  {obj["BodyParts"].map((obj1) => (
-                    <Alert key={obj1} variant={"success"}>
-                      {obj1["Name"]}
-                    </Alert>
-                  ))}
-                </Alert>
-              ))}
+              {ppeDetected.map((obj) =>
+                // <Alert key={obj} variant={"primary"}>
+                obj["BodyParts"].map((obj1) => (
+                  <Alert key={obj1} variant={"success"}>
+                    {obj1["Name"]}
+                  </Alert>
+                ))
+                // </Alert>
+              )}
             </>
           </Col>
         </Row>

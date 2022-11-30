@@ -35,8 +35,10 @@ const awsmobile = {
             "region": "us-east-1"
         }
     ],
+    "aws_appsync_graphqlEndpoint": "https://iiebpksysncyljoey27m4doyvq.appsync-api.us-east-1.amazonaws.com/graphql",
     "aws_appsync_region": "us-east-1",
-    "aws_appsync_authenticationType": "API_KEY"
+    "aws_appsync_authenticationType": "API_KEY",
+    "aws_appsync_apiKey": "da2-572gfz672zei3mkvw6dmq3rzee"
 };
 
 
