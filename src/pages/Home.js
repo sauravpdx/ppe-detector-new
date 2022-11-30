@@ -4,9 +4,6 @@ import { Container, Row, Col, Form, Image, Alert } from "react-bootstrap";
 import { Storage, API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../graphql/mutations";
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 function Home(props) {
   const [imageUrl, setImageUrl] = useState(null);
   const [selectedFile, setSelectedFile] = useState([]);
@@ -49,8 +46,6 @@ function Home(props) {
     setPPEDetected(data["body"]["Persons"]);
   };
 
-  const notify = () => toast("File Uploaded!! Wait for the Results!!");
-
   return (
     <Container>
       <div style={{ marginTop: "7%" }}>
@@ -59,7 +54,9 @@ function Home(props) {
           className="mb-4 text-center"
           style={{ border: "solid", backgroundColor: "#c7c7c7" }}
         >
-          <h1 style={{ alignText: "center" }}>Welcome to PPE Detector Tool</h1>
+          <h1 style={{ alignText: "center" }}>
+            WELCOME TO THE PPE DETECTOR TOOL
+          </h1>
           <h4>
             {" "}
             You can upload your image and check if the worker is using PPE in
