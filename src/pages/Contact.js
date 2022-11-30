@@ -1,7 +1,23 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import emailjs from "emailjs-com";
 
 function Contact(props) {
+  function sendEmail(e) {
+    e.preventDefault();
+    emailjs
+      .sendForm(
+        "service_phjhm7g",
+        "template_yel3o2b",
+        e.target,
+        "QQTgS0APVOjjiErXA"
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  }
+
   return (
     <Container>
       <div style={{ marginTop: "7%" }}>
@@ -32,9 +48,64 @@ function Contact(props) {
             </a>
           </Col>
         </Row>
+        <br></br>
+        <Row className="mb-5 text-center">
+          <Col></Col>
+          <Col style={{ border: "solid" }}>
+            <div
+              style={{
+                alignText: "center",
+                alignItems: "center",
+                boxSizing: "border-box",
+              }}
+            >
+              <h3 className="mb-3">Contact Us</h3>
+              <form onSubmit={sendEmail}>
+                <div className="mb-3">
+                  <label className="form-label" htmlFor="name">
+                    Name
+                  </label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    name="name"
+                    id="name"
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label" htmlFor="email">
+                    Email
+                  </label>
+                  <input
+                    className="form-control"
+                    type="email"
+                    name="email"
+                    id="email"
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label className="form-label" htmlFor="message">
+                    Message
+                  </label>
+                  <textarea
+                    className="form-control"
+                    name="message"
+                    id="message"
+                    required
+                  />
+                </div>
+                <button className="btn btn-danger" type="submit">
+                  Submit
+                </button>
+              </form>
+            </div>
+          </Col>
+          <Col></Col>
+        </Row>
       </div>
     </Container>
   );
 }
-
 export default Contact;
