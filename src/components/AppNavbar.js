@@ -48,6 +48,13 @@ function AppNavbar(props) {
               >
                 Contact Us
               </Nav.Link>
+              <Nav.Link
+                active={pathname.includes("howitworks")}
+                style={{ marginRight: "30px" }}
+                href="/howitworks"
+              >
+                How It Works?
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

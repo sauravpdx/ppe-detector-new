@@ -11,7 +11,14 @@ function About(props) {
   return (
     <Container>
       <div style={{ marginTop: "8%", marginBottom: "8%" }}>
-        <Row className="mb-4 text-center">
+        <Row
+          className="mb-4 text-center"
+          style={{
+            border: "solid",
+            backgroundColor: "#c7c7c7",
+            fontfamily: "Roboto",
+          }}
+        >
           <h1 style={{ alignText: "center" }}>
             <u>ABOUT</u>
           </h1>
@@ -25,7 +32,10 @@ function About(props) {
           </h5>
         </Row>
         <br></br>
-        <Row className="mb-4 text-center">
+        <Row
+          className="mb-4 text-center"
+          style={{ backgroundColor: "#c7c7c7" }}
+        >
           <h2 style={{ alignText: "center" }}>
             <u>REFERENCES</u>
           </h2>
@@ -47,12 +57,15 @@ function About(props) {
           </h5>
         </Row>
         <br></br>
-        <Row className="mb-4 text-center">
+        <Row
+          className="mb-4 text-center"
+          style={{ backgroundColor: "#c7c7c7" }}
+        >
           <h2 style={{ alignText: "center" }}>
             <u>IMAGES</u>
           </h2>
         </Row>
-        <Row>
+        <Row className="mb-4 text-center">
           <Carousel>
             <Carousel.Item>
               <img

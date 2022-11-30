@@ -4,6 +4,9 @@ import { Container, Row, Col, Form, Image, Alert } from "react-bootstrap";
 import { Storage, API, graphqlOperation } from "aws-amplify";
 import * as mutations from "../graphql/mutations";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function Home(props) {
   const [imageUrl, setImageUrl] = useState(null);
   const [selectedFile, setSelectedFile] = useState([]);
@@ -45,11 +48,17 @@ function Home(props) {
     console.log(data["body"]["Persons"]);
     setPPEDetected(data["body"]["Persons"]);
   };
+
+  const notify = () => toast("File Uploaded!! Wait for the Results!!");
+
   return (
     <Container>
       <div style={{ marginTop: "7%" }}>
         {" "}
-        <Row className="mb-4 text-center">
+        <Row
+          className="mb-4 text-center"
+          style={{ border: "solid", backgroundColor: "#c7c7c7" }}
+        >
           <h1 style={{ alignText: "center" }}>Welcome to PPE Detector Tool</h1>
           <h4>
             {" "}
@@ -60,12 +69,14 @@ function Home(props) {
         <Row className="justify-content-md-center mt-10">
           <Col md="auto">
             <Form.Group controlId="formFile" className="mb-3">
-              <Form.Label className="text-center">Select your File</Form.Label>
+              <Form.Label className="text-center">
+                <b>Select your File</b>
+              </Form.Label>
 
               <Form.Control
                 type="file"
                 multiple={true}
-                accept="image/png, image/jpeg"
+                accept="image/png, image/jpeg, image/jpg"
                 onChange={(e) => onSelectFile(e)}
               />
             </Form.Group>
