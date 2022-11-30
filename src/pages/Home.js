@@ -18,45 +18,47 @@ function Home(props) {
   const [ppeDetected, setPPEDetected] = useState([]);
   const [uploadProgress, setUploadProgress] = useState(0);
 
-  // useEffect(() => {
-
-  // });
-
   const onSelectFile = async (e) => {
     e.preventDefault();
-    console.log(e.target.files);
+    // console.log(e.target.files);
     setSelectedFile(e.target.files[0]);
     setImageUrl(URL.createObjectURL(e.target.files[0]));
     uploadFile(e.target.files[0]);
   };
 
   const uploadFile = async (file) => {
+    setPPEDetected([]);
     try {
-      NotificationManager.info("File Upload Started", "Info", 5000);
+      NotificationManager.info("File Upload Started", "Info", 2000);
       await Storage.put("test.png", file, {
         progressCallback(progress) {
           setUploadProgress(progress.loaded / progress.total);
-          // console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
         },
       });
       NotificationManager.success("File Upload Successfully", "Success", 5000);
-      console.log("File Uploaded Successfully ");
+      // console.log("File Uploaded Successfully ");
       await detectPPE();
     } catch (error) {
-      console.log("Error uploading file: ", error);
+      // console.log("Error uploading file: ", error);
       NotificationManager.warning("Error uploading file", "Warning", 5000);
     }
   };
 
-  const detectPPE = async (s3key) => {
-    NotificationManager.info("Now Detecting PPE", "Info", 5000);
-    const resp = await API.graphql(
-      graphqlOperation(mutations.ppedetector, {
-        key: "test.png",
-      })
-    );
-    var data = JSON.parse(resp.data.ppedetector);
-    setPPEDetected(data["body"]["Persons"]);
+  const detectPPE = async () => {
+    NotificationManager.info("Now Detecting PPE", "Please Wait", 2000);
+    try {
+      const resp = await API.graphql(
+        graphqlOperation(mutations.ppedetector, {
+          key: "test.png",
+        })
+      );
+      var data = JSON.parse(resp.data.ppedetector);
+      setPPEDetected(data["body"]["Persons"]);
+      // console.log(data);
+    } catch (error) {
+      console.log("Error uploading file: ", error);
+      NotificationManager.warning("Error uploading file", "Warning", 5000);
+    }
   };
 
   return (
@@ -124,15 +126,16 @@ function Home(props) {
           <Col lg={6} className="text-center">
             <>
               {ppeDetected.length > 0 && <p>PPE Present in</p>}
-              {ppeDetected.map(
-                (obj) =>
-                  // <Alert key={obj} variant={"primary"}>
-                  obj["BodyParts"].map((obj1) => (
-                    <Alert key={obj1} variant={"success"}>
-                      {obj1["Name"]}
-                    </Alert>
-                  ))
-                // </Alert>
+              {ppeDetected.map((obj) =>
+                obj["BodyParts"].map(
+                  (obj1) =>
+                    obj1["EquipmentDetections"].length > 0 && (
+                      <Alert key={obj1} variant={"success"}>
+                        {obj1["Name"]}
+                        {/* {obj1["EquipmentDetections"][0]["Type"]} */}
+                      </Alert>
+                    )
+                )
               )}
             </>
           </Col>
