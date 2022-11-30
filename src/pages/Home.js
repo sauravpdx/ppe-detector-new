@@ -18,10 +18,6 @@ function Home(props) {
   const [ppeDetected, setPPEDetected] = useState([]);
   const [uploadProgress, setUploadProgress] = useState(0);
 
-  // useEffect(() => {
-
-  // });
-
   const onSelectFile = async (e) => {
     e.preventDefault();
     console.log(e.target.files);
@@ -36,7 +32,6 @@ function Home(props) {
       await Storage.put("test.png", file, {
         progressCallback(progress) {
           setUploadProgress(progress.loaded / progress.total);
-          // console.log(`Uploaded: ${progress.loaded}/${progress.total}`);
         },
       });
       NotificationManager.success("File Upload Successfully", "Success", 5000);
@@ -48,15 +43,20 @@ function Home(props) {
     }
   };
 
-  const detectPPE = async (s3key) => {
+  const detectPPE = async () => {
     NotificationManager.info("Now Detecting PPE", "Info", 5000);
-    const resp = await API.graphql(
-      graphqlOperation(mutations.ppedetector, {
-        key: "test.png",
-      })
-    );
-    var data = JSON.parse(resp.data.ppedetector);
-    setPPEDetected(data["body"]["Persons"]);
+    try {
+      const resp = await API.graphql(
+        graphqlOperation(mutations.ppedetector, {
+          key: "test.png",
+        })
+      );
+      var data = JSON.parse(resp.data.ppedetector);
+      setPPEDetected(data["body"]["Persons"]);
+    } catch (error) {
+      console.log("Error uploading file: ", error);
+      NotificationManager.warning("Error uploading file", "Warning", 5000);
+    }
   };
 
   return (
@@ -124,15 +124,12 @@ function Home(props) {
           <Col lg={6} className="text-center">
             <>
               {ppeDetected.length > 0 && <p>PPE Present in</p>}
-              {ppeDetected.map(
-                (obj) =>
-                  // <Alert key={obj} variant={"primary"}>
-                  obj["BodyParts"].map((obj1) => (
-                    <Alert key={obj1} variant={"success"}>
-                      {obj1["Name"]}
-                    </Alert>
-                  ))
-                // </Alert>
+              {ppeDetected.map((obj) =>
+                obj["BodyParts"].map((obj1) => (
+                  <Alert key={obj1} variant={"success"}>
+                    {obj1["Name"]}
+                  </Alert>
+                ))
               )}
             </>
           </Col>
