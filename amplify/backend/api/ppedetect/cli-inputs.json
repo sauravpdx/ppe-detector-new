@@ -1,31 +1,13 @@
 {
   "version": 1,
-  "paths": {
-    "/ppedetect": {
-      "name": "/ppedetect",
-      "lambdaFunction": "ppedetector",
-      "permissions": {
-        "setting": "open"
-      }
-    },
-    "/": {
-      "name": "/",
-      "lambdaFunction": "ppedetector",
-      "permissions": {
-        "setting": "protected",
-        "auth": [
-          "create",
-          "read",
-          "update",
-          "delete"
-        ],
-        "guest": [
-          "create",
-          "read",
-          "update",
-          "delete"
-        ]
-      }
+  "serviceConfiguration": {
+    "apiName": "ppedetect",
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 365,
+      "apiKeyExpirationDate": "2023-11-30T07:45:49.228Z",
+      "keyDescription": "test"
     }
   }
 }

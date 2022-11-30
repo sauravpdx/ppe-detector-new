@@ -28,17 +28,10 @@ const awsmobile = {
     ],
     "aws_user_files_s3_bucket": "ppedetector235958-dev",
     "aws_user_files_s3_bucket_region": "us-east-1",
-    "aws_cloud_logic_custom": [
-        {
-            "name": "ppedetect",
-            "endpoint": "https://f8rtde00da.execute-api.us-east-1.amazonaws.com/dev",
-            "region": "us-east-1"
-        }
-    ],
-    "aws_appsync_graphqlEndpoint": "https://iiebpksysncyljoey27m4doyvq.appsync-api.us-east-1.amazonaws.com/graphql",
+    "aws_appsync_graphqlEndpoint": "https://ily6d27nwngjjm27pin7i5cbdi.appsync-api.us-east-1.amazonaws.com/graphql",
     "aws_appsync_region": "us-east-1",
     "aws_appsync_authenticationType": "API_KEY",
-    "aws_appsync_apiKey": "da2-572gfz672zei3mkvw6dmq3rzee"
+    "aws_appsync_apiKey": "da2-wr5hjrtwbbax3ldk2hmqjmkwcy"
 };
 
 

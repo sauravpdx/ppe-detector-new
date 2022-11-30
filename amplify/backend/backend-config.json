@@ -43,20 +43,6 @@
   },
   "api": {
     "ppedetect": {
-      "service": "API Gateway",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "ppedetector",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
-        }
-      ]
-    },
-    "ppedetector": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -66,8 +52,8 @@
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
               "apiKeyExpirationDays": 365,
-              "apiKeyExpirationDate": "2023-11-30T06:36:54.372Z",
-              "description": "tesy"
+              "apiKeyExpirationDate": "2023-11-30T07:45:49.228Z",
+              "description": "test"
             }
           },
           "additionalAuthenticationProviders": []

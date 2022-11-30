@@ -152,34 +152,13 @@
         }
       }
     },
-    "APIGatewayAuthStack": {
-      "Type": "AWS::CloudFormation::Stack",
-      "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-ppedetector-dev-235958-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json",
-        "Parameters": {
-          "authRoleName": {
-            "Ref": "AuthRoleName"
-          },
-          "unauthRoleName": {
-            "Ref": "UnauthRoleName"
-          },
-          "env": "dev",
-          "ppedetect": {
-            "Fn::GetAtt": [
-              "apippedetect",
-              "Outputs.ApiId"
-            ]
-          }
-        }
-      }
-    },
     "functionppedetector": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
         "TemplateURL": "https://s3.amazonaws.com/amplify-ppedetector-dev-235958-deployment/amplify-cfn-templates/function/ppedetector-cloudformation-template.json",
         "Parameters": {
           "deploymentBucketName": "amplify-ppedetector-dev-235958-deployment",
-          "s3Key": "amplify-builds/ppedetector-6b4e46504e69514e7876-build.zip",
+          "s3Key": "amplify-builds/ppedetector-574f724a2f532f4e5457-build.zip",
           "env": "dev"
         }
       }
@@ -274,34 +253,13 @@
     "apippedetect": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-ppedetector-dev-235958-deployment/amplify-cfn-templates/api/ppedetect-cloudformation-template.json",
-        "Parameters": {
-          "functionppedetectorName": {
-            "Fn::GetAtt": [
-              "functionppedetector",
-              "Outputs.Name"
-            ]
-          },
-          "functionppedetectorArn": {
-            "Fn::GetAtt": [
-              "functionppedetector",
-              "Outputs.Arn"
-            ]
-          },
-          "env": "dev"
-        }
-      }
-    },
-    "apippedetector": {
-      "Type": "AWS::CloudFormation::Stack",
-      "Properties": {
         "TemplateURL": "https://s3.amazonaws.com/amplify-ppedetector-dev-235958-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "Parameters": {
-          "AppSyncApiName": "ppedetector",
+          "AppSyncApiName": "ppedetect",
           "DynamoDBBillingMode": "PAY_PER_REQUEST",
           "DynamoDBEnableServerSideEncryption": false,
           "S3DeploymentBucket": "amplify-ppedetector-dev-235958-deployment",
-          "S3DeploymentRootKey": "amplify-appsync-files/647c1c9b45ef4afa5341798609e756b4e5f55a9d",
+          "S3DeploymentRootKey": "amplify-appsync-files/c807b3000e07f9dc82d4b0e239042f9316dbcf80",
           "env": "dev"
         }
       }
