@@ -1,6 +1,8 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import emailjs from "emailjs-com";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Contact(props) {
   function sendEmail(e) {
@@ -18,6 +20,7 @@ function Contact(props) {
       .catch((err) => console.log(err));
   }
 
+  const notify = () => toast("Message Sent");
   return (
     <Container>
       <div style={{ marginTop: "7%" }}>
@@ -59,7 +62,9 @@ function Contact(props) {
                 boxSizing: "border-box",
               }}
             >
-              <h3 className="mb-3">Contact Us</h3>
+              <h3 className="mb-3" style={{ marginTop: "10px" }}>
+                Contact Us
+              </h3>
               <form onSubmit={sendEmail}>
                 <div className="mb-3">
                   <label className="form-label" htmlFor="name">
@@ -96,9 +101,15 @@ function Contact(props) {
                     required
                   />
                 </div>
-                <button className="btn btn-danger" type="submit">
+                <button
+                  className="btn btn-danger"
+                  type="submit"
+                  onClick={notify}
+                  style={{ marginBottom: "10px" }}
+                >
                   Submit
                 </button>
+                <ToastContainer />
               </form>
             </div>
           </Col>
