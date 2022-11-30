@@ -20,31 +20,32 @@ function Home(props) {
 
   const onSelectFile = async (e) => {
     e.preventDefault();
-    console.log(e.target.files);
+    // console.log(e.target.files);
     setSelectedFile(e.target.files[0]);
     setImageUrl(URL.createObjectURL(e.target.files[0]));
     uploadFile(e.target.files[0]);
   };
 
   const uploadFile = async (file) => {
+    setPPEDetected([]);
     try {
-      NotificationManager.info("File Upload Started", "Info", 5000);
+      NotificationManager.info("File Upload Started", "Info", 2000);
       await Storage.put("test.png", file, {
         progressCallback(progress) {
           setUploadProgress(progress.loaded / progress.total);
         },
       });
       NotificationManager.success("File Upload Successfully", "Success", 5000);
-      console.log("File Uploaded Successfully ");
+      // console.log("File Uploaded Successfully ");
       await detectPPE();
     } catch (error) {
-      console.log("Error uploading file: ", error);
+      // console.log("Error uploading file: ", error);
       NotificationManager.warning("Error uploading file", "Warning", 5000);
     }
   };
 
   const detectPPE = async () => {
-    NotificationManager.info("Now Detecting PPE", "Info", 5000);
+    NotificationManager.info("Now Detecting PPE", "Please Wait", 2000);
     try {
       const resp = await API.graphql(
         graphqlOperation(mutations.ppedetector, {
@@ -53,6 +54,7 @@ function Home(props) {
       );
       var data = JSON.parse(resp.data.ppedetector);
       setPPEDetected(data["body"]["Persons"]);
+      // console.log(data);
     } catch (error) {
       console.log("Error uploading file: ", error);
       NotificationManager.warning("Error uploading file", "Warning", 5000);
@@ -125,11 +127,15 @@ function Home(props) {
             <>
               {ppeDetected.length > 0 && <p>PPE Present in</p>}
               {ppeDetected.map((obj) =>
-                obj["BodyParts"].map((obj1) => (
-                  <Alert key={obj1} variant={"success"}>
-                    {obj1["Name"]}
-                  </Alert>
-                ))
+                obj["BodyParts"].map(
+                  (obj1) =>
+                    obj1["EquipmentDetections"].length > 0 && (
+                      <Alert key={obj1} variant={"success"}>
+                        {obj1["Name"]}
+                        {/* {obj1["EquipmentDetections"][0]["Type"]} */}
+                      </Alert>
+                    )
+                )
               )}
             </>
           </Col>
