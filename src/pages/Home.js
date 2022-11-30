@@ -44,23 +44,6 @@ function Home(props) {
     var data = JSON.parse(resp.data.ppedetector);
     console.log(data["body"]["Persons"]);
     setPPEDetected(data["body"]["Persons"]);
-    // fetch("https://f8rtde00da.execute-api.us-east-1.amazonaws.com/dev")
-    //   .then((res) => res.json())
-    //   .then((json) => {
-    //     console.log(json);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    // // };
-    // API.get("ppedetect", "/ppedetect")
-    //   .then((response) => {
-    //     console.log(response);
-    //     // Add your code here
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   };
   return (
     <Container>
@@ -107,13 +90,14 @@ function Home(props) {
         >
           <Col lg={6} className="text-center">
             <>
-              {ppeDetected.map((obj) =>
-                // <Alert key={obj} variant={"primary"}>
-                obj["BodyParts"].map((obj1) => (
-                  <Alert key={obj1} variant={"success"}>
-                    {obj1["Name"]}
-                  </Alert>
-                ))
+              {ppeDetected.map(
+                (obj) =>
+                  // <Alert key={obj} variant={"primary"}>
+                  obj["BodyParts"].map((obj1) => (
+                    <Alert key={obj1} variant={"success"}>
+                      {obj1["Name"]}
+                    </Alert>
+                  ))
                 // </Alert>
               )}
             </>
