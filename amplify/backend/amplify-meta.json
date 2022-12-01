@@ -23,20 +23,20 @@
         "Name": "ppedetector-dev",
         "LambdaExecutionRole": "ppedetectorLambdaRole5cc5dcef-dev"
       },
-      "lastPushTimeStamp": "2022-11-30T07:57:16.756Z",
+      "lastPushTimeStamp": "2022-11-30T21:24:07.375Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ppedetector-dev-235958-deployment/amplify-cfn-templates/function/ppedetector-cloudformation-template.json",
         "logicalId": "functionppedetector"
       },
       "s3Bucket": {
         "deploymentBucketName": "amplify-ppedetector-dev-235958-deployment",
-        "s3Key": "amplify-builds/ppedetector-574f724a2f532f4e5457-build.zip"
+        "s3Key": "amplify-builds/ppedetector-466a463876536778686a-build.zip"
       },
-      "lastBuildTimeStamp": "2022-11-30T07:48:04.524Z",
+      "lastBuildTimeStamp": "2022-11-30T21:22:28.081Z",
       "lastBuildType": "PROD",
-      "lastPackageTimeStamp": "2022-11-30T07:48:08.244Z",
-      "distZipFilename": "ppedetector-574f724a2f532f4e5457-build.zip",
-      "lastPushDirHash": "XIVoYIC4lhsD+NGUhGsT9I8x/Uw="
+      "lastPackageTimeStamp": "2022-11-30T21:22:34.070Z",
+      "distZipFilename": "ppedetector-466a463876536778686a-build.zip",
+      "lastPushDirHash": "JvAafwDdGBFx+zeyE4xVoTjJguk="
     }
   },
   "auth": {
@@ -75,7 +75,7 @@
         "IdentityPoolName": "ppedetector68af830f_identitypool_68af830f__dev",
         "UserPoolName": "ppedetector68af830f_userpool_68af830f"
       },
-      "lastPushTimeStamp": "2022-11-30T07:57:16.760Z",
+      "lastPushTimeStamp": "2022-11-30T21:24:06.190Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ppedetector-dev-235958-deployment/amplify-cfn-templates/auth/ppedetector68af830f-cloudformation-template.json",
         "logicalId": "authppedetector68af830f"
@@ -92,7 +92,7 @@
         "BucketName": "ppedetector235958-dev",
         "Region": "us-east-1"
       },
-      "lastPushTimeStamp": "2022-11-30T07:57:18.179Z",
+      "lastPushTimeStamp": "2022-11-30T21:24:06.192Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ppedetector-dev-235958-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
         "logicalId": "storageppedetector"
@@ -125,7 +125,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-ppedetector-dev-235958-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apippedetect"
       },
-      "lastPushTimeStamp": "2022-11-30T07:57:16.763Z",
+      "lastPushTimeStamp": "2022-11-30T21:24:06.194Z",
       "lastPushDirHash": "9gPx6c05/s/zeD8CQ5cvqe3hwiI="
     }
   }

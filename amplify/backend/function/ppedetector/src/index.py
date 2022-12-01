@@ -13,9 +13,9 @@ def detect_labels(photo="public/test.png", bucket="ppedetector235958-dev"):
 
 def handler(event, context):
 
-    print('received event:')
-    print(event)
-    resp = detect_labels()
+    print('received event:',event)
+    key = (event["arguments"]["key"])
+    resp = detect_labels("public/"+key)
 
     return {
         'statusCode': 200,

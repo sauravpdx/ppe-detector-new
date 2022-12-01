@@ -47,6 +47,7 @@ function About(props) {
             <a href="https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html">
               Amazon Rekognition
             </a>
+            <a href="https://docs.amplify.aws/">Amazon Amplify Framework</a>
             <br></br>
             <a href="https://www.geeksforgeeks.org/reactjs-tutorials/">React</a>
             <br></br>

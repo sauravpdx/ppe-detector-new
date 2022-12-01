@@ -7,6 +7,7 @@ import {
   Image,
   Alert,
   ProgressBar,
+  Button,
 } from "react-bootstrap";
 import { NotificationManager } from "react-notifications";
 import { Storage, API, graphqlOperation } from "aws-amplify";
@@ -18,9 +19,25 @@ function Home(props) {
   const [ppeDetected, setPPEDetected] = useState([]);
   const [uploadProgress, setUploadProgress] = useState(0);
 
+  useEffect(() => {
+    setSelectedFile(0);
+    setPPEDetected([]);
+  }, []);
+
+  const onSampleSelect = async (sample) => {
+    setPPEDetected([]);
+    let url = `${process.env.PUBLIC_URL}${sample}`;
+    setImageUrl(url);
+    fetch(url)
+      .then((response) => response.blob())
+      .then(async (blob) => {
+        var file = new File([blob], "test.png");
+        uploadFile(file);
+      });
+  };
+
   const onSelectFile = async (e) => {
     e.preventDefault();
-    // console.log(e.target.files);
     setSelectedFile(e.target.files[0]);
     setImageUrl(URL.createObjectURL(e.target.files[0]));
     uploadFile(e.target.files[0]);
@@ -39,7 +56,7 @@ function Home(props) {
       // console.log("File Uploaded Successfully ");
       await detectPPE();
     } catch (error) {
-      // console.log("Error uploading file: ", error);
+      console.log("Error uploading file: ", error);
       NotificationManager.warning("Error uploading file", "Warning", 5000);
     }
   };
@@ -54,10 +71,9 @@ function Home(props) {
       );
       var data = JSON.parse(resp.data.ppedetector);
       setPPEDetected(data["body"]["Persons"]);
-      // console.log(data);
     } catch (error) {
-      console.log("Error uploading file: ", error);
-      NotificationManager.warning("Error uploading file", "Warning", 5000);
+      console.log("Error Detecting PPE: ", error);
+      NotificationManager.warning("Error detecting PPE", "Warning", 5000);
     }
   };
 
@@ -79,7 +95,8 @@ function Home(props) {
           </h4>
         </Row>
         <Row className="justify-content-md-center mt-10">
-          <Col md="auto">
+          <Col md="3"></Col>
+          <Col md="6">
             <Form.Group controlId="formFile" className="mb-3">
               <Form.Label className="text-center">
                 <b>Select your File</b>
@@ -93,8 +110,10 @@ function Home(props) {
               />
             </Form.Group>
           </Col>
+          <Col md="3"></Col>
         </Row>
         <Row className="justify-content-md-center mt-10">
+          <Col lg={3}></Col>
           <Col lg={6} className="text-center">
             {imageUrl && (
               <>
@@ -118,6 +137,32 @@ function Home(props) {
               </div>
             )}
           </Col>
+          <Col md="3">
+            <div style={{ marginTop: "10px" }}>
+              <h5>Test Using Sample Files</h5>
+              <Button
+                style={{ margin: "10px" }}
+                onClick={() => onSampleSelect("/sample1.png")}
+              >
+                {" "}
+                Use Sample 1
+              </Button>
+              <Button
+                style={{ margin: "10px" }}
+                onClick={() => onSampleSelect("/sample2.png")}
+              >
+                {" "}
+                Use Sample 2
+              </Button>
+              <Button
+                style={{ margin: "10px" }}
+                onClick={() => onSampleSelect("/sample3.png")}
+              >
+                {" "}
+                Use Sample 3
+              </Button>
+            </div>
+          </Col>
         </Row>
         <Row
           style={{ marginTop: "20px" }}
@@ -132,7 +177,6 @@ function Home(props) {
                     obj1["EquipmentDetections"].length > 0 && (
                       <Alert key={obj1} variant={"success"}>
                         {obj1["Name"]}
-                        {/* {obj1["EquipmentDetections"][0]["Type"]} */}
                       </Alert>
                     )
                 )
