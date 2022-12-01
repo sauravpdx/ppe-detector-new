@@ -14,7 +14,7 @@ projects:
         apiId: null
         maxDepth: 2
   ppedetect:
-    schemaPath: src/graphql/schema.json
+    schemaPath: amplify/backend/api/ppedetect/build/schema.graphql
     includes:
       - src/graphql/**/*.js
     excludes:
