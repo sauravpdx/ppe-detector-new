@@ -41,13 +41,13 @@ function AppNavbar(props) {
               >
                 About
               </Nav.Link>
-              <Nav.Link
-                active={pathname.includes("contact")}
-                style={{ marginRight: "30px" }}
-                href="/contact"
-              >
-                Contact Us
-              </Nav.Link>
+//               <Nav.Link
+//                 active={pathname.includes("contact")}
+//                 style={{ marginRight: "30px" }}
+//                 href="/contact"
+//               >
+//                 Contact Us
+//               </Nav.Link>
               <Nav.Link
                 active={pathname.includes("howitworks")}
                 style={{ marginRight: "30px" }}
