@@ -1,0 +1,29 @@
+.about-container {
+  margin-top: 8%;
+  margin-bottom: 8%;
+}
+
+.about-row {
+  border: solid;
+  background-color: #c7c7c7;
+  font-family: "Roboto";
+}
+
+.about-heading {
+  text-align: center;
+}
+
+.about-text {
+  font-family: "Roboto";
+}
+
+.about-carousel {
+  margin-bottom: 4%;
+}
+
+.about-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
