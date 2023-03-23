@@ -15,46 +15,49 @@ import * as mutations from "../graphql/mutations";
 
 function Home(props) {
   const [imageUrl, setImageUrl] = useState(null);
-  const [selectedFile, setSelectedFile] = useState([]);
+  const [selectedFile, setSelectedFile] = useState(null);
   const [ppeDetected, setPPEDetected] = useState([]);
   const [uploadProgress, setUploadProgress] = useState(0);
 
   useEffect(() => {
-    setSelectedFile(0);
     setPPEDetected([]);
   }, []);
 
-  const onSampleSelect = async (sample) => {
+  const onSampleSelect = (sample) => {
     setPPEDetected([]);
-    let url = `${process.env.PUBLIC_URL}${sample}`;
+    const url = `${process.env.PUBLIC_URL}${sample}`;
     setImageUrl(url);
     fetch(url)
       .then((response) => response.blob())
-      .then(async (blob) => {
-        var file = new File([blob], "test.png");
+      .then((blob) => {
+        const file = new File([blob], "test.png");
         uploadFile(file);
       });
   };
 
-  const onSelectFile = async (e) => {
+  const onSelectFile = (e) => {
     e.preventDefault();
-    setSelectedFile(e.target.files[0]);
-    setImageUrl(URL.createObjectURL(e.target.files[0]));
-    uploadFile(e.target.files[0]);
+    const file = e.target.files[0];
+    setSelectedFile(file);
+    setImageUrl(URL.createObjectURL(file));
+    uploadFile(file);
   };
 
   const uploadFile = async (file) => {
     setPPEDetected([]);
+    NotificationManager.info("File Upload Started", "Info", 2000);
     try {
-      NotificationManager.info("File Upload Started", "Info", 2000);
       await Storage.put("test.png", file, {
         progressCallback(progress) {
           setUploadProgress(progress.loaded / progress.total);
         },
       });
-      NotificationManager.success("File Upload Successfully", "Success", 5000);
-      // console.log("File Uploaded Successfully ");
-      await detectPPE();
+      NotificationManager.success(
+        "File Uploaded Successfully",
+        "Success",
+        5000
+      );
+      detectPPE();
     } catch (error) {
       console.log("Error uploading file: ", error);
       NotificationManager.warning("Error uploading file", "Warning", 5000);
@@ -69,7 +72,7 @@ function Home(props) {
           key: "test.png",
         })
       );
-      var data = JSON.parse(resp.data.ppedetector);
+      const data = JSON.parse(resp.data.ppedetector);
       setPPEDetected(data["body"]["Persons"]);
     } catch (error) {
       console.log("Error Detecting PPE: ", error);
@@ -77,19 +80,17 @@ function Home(props) {
     }
   };
 
+  const sampleFiles = ["/sample1.png", "/sample2.png", "/sample3.png"];
+
   return (
     <Container>
       <div style={{ marginTop: "7%" }}>
-        {" "}
         <Row
           className="mb-4 text-center"
           style={{ border: "solid", backgroundColor: "#c7c7c7" }}
         >
-          <h1 style={{ alignText: "center" }}>
-            WELCOME TO THE PPE DETECTOR TOOL
-          </h1>
+          <h1>WELCOME TO THE PPE DETECTOR TOOL</h1>
           <h4>
-            {" "}
             You can upload your image and check if the worker is using PPE in
             the workspace
           </h4>
@@ -101,12 +102,10 @@ function Home(props) {
               <Form.Label className="text-center">
                 <b>Select your File</b>
               </Form.Label>
-
               <Form.Control
                 type="file"
-                multiple={true}
                 accept="image/png, image/jpeg, image/jpg"
-                onChange={(e) => onSelectFile(e)}
+                onChange={onSelectFile}
               />
             </Form.Group>
           </Col>
@@ -116,15 +115,13 @@ function Home(props) {
           <Col lg={3}></Col>
           <Col lg={6} className="text-center">
             {imageUrl && (
-              <>
-                <Image
-                  class="mx-auto d-block"
-                  width={400}
-                  height={400}
-                  src={imageUrl}
-                  rounded
-                />
-              </>
+              <Image
+                className="mx-auto d-block"
+                width={400}
+                height={400}
+                src={imageUrl}
+                rounded
+              />
             )}
             {uploadProgress * 100 > 0 && uploadProgress * 100 < 99 && (
               <div style={{ margin: "20px" }}>
@@ -140,27 +137,15 @@ function Home(props) {
           <Col md="3">
             <div style={{ marginTop: "10px" }}>
               <h5>Test Using Sample Files</h5>
-              <Button
-                style={{ margin: "10px" }}
-                onClick={() => onSampleSelect("/sample1.png")}
-              >
-                {" "}
-                Use Sample 1
-              </Button>
-              <Button
-                style={{ margin: "10px" }}
-                onClick={() => onSampleSelect("/sample2.png")}
-              >
-                {" "}
-                Use Sample 2
-              </Button>
-              <Button
-                style={{ margin: "10px" }}
-                onClick={() => onSampleSelect("/sample3.png")}
-              >
-                {" "}
-                Use Sample 3
-              </Button>
+              {sampleFiles.map((sample, index) => (
+                <Button
+                  key={index}
+                  style={{ margin: "10px" }}
+                  onClick={() => onSampleSelect(sample)}
+                >
+                  Use Sample {index + 1}
+                </Button>
+              ))}
             </div>
           </Col>
         </Row>
@@ -169,19 +154,17 @@ function Home(props) {
           className="justify-content-md-center mt-10"
         >
           <Col lg={6} className="text-center">
-            <>
-              {ppeDetected.length > 0 && <p>PPE Present in</p>}
-              {ppeDetected.map((obj) =>
-                obj["BodyParts"].map(
-                  (obj1) =>
-                    obj1["EquipmentDetections"].length > 0 && (
-                      <Alert key={obj1} variant={"success"}>
-                        {obj1["Name"]}
-                      </Alert>
-                    )
-                )
-              )}
-            </>
+            {ppeDetected.length > 0 && <p>PPE Present in</p>}
+            {ppeDetected.map((obj) =>
+              obj["BodyParts"].map(
+                (obj1) =>
+                  obj1["EquipmentDetections"].length > 0 && (
+                    <Alert key={obj1["Name"]} variant={"success"}>
+                      {obj1["Name"]}
+                    </Alert>
+                  )
+              )
+            )}
           </Col>
         </Row>
       </div>
