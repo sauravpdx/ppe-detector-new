@@ -83,6 +83,7 @@ function Home(props) {
     } catch (error) {
       console.log("Error Detecting PPE: ", error);
       NotificationManager.warning("Error detecting PPE", "Warning", 5000);
+      setPPEDetected([]);
     }
   };
 
@@ -107,8 +108,7 @@ function Home(props) {
               </Form.Label>
               <Form.Control
                 type="file"
-                accept="
-                image/png, image/jpeg, image/jpg"
+                accept="image/png, image/jpeg, image/jpg"
                 onChange={onSelectFile}
               />
             </Form.Group>
