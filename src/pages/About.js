@@ -9,7 +9,7 @@ import image5 from "./Images/image5.jpeg";
 import "../styles/About.css";
 
 function About(props) {
-  const images = [image1, image2, image3, image4, image5]; // Importing the ImageCarousel component
+  const images = [image1, image2, image3, image4, image5]; // Importing the Images
 
   return (
     <Container className="about-container">
