@@ -6,8 +6,10 @@ import image1 from "./Images/screenshot1.png";
 import image2 from "./Images/screenshot2.png";
 import image3 from "./Images/screenshot3.png";
 import image4 from "./Images/screenshot4.png";
+import "../styles/HowItWorks.css";
 
 function HowItWorks(props) {
+  // Data for frequently asked questions
   const data = {
     title: "FAQs",
     rows: [
@@ -37,41 +39,26 @@ function HowItWorks(props) {
     ],
   };
 
+  // Styling for the frequently asked questions
   const styles = {
-    // bgColor: 'white',
     titleTextColor: "blue",
     rowTitleColor: "blue",
-    // rowContentColor: 'grey',
-    // arrowColor: "red",
   };
 
-  const config = {
-    // animate: true,
-    // arrowIcon: "V",
-    // tabFocus: true
-  };
+  const config = {};
 
   return (
     <Container>
-      <div style={{ marginTop: "8%", marginBottom: "8%" }}>
-        <Row
-          className="mb-4 text-center"
-          style={{
-            border: "solid",
-            backgroundColor: "#c7c7c7",
-            fontfamily: "Roboto",
-          }}
-        >
-          <h1 style={{ alignText: "center" }}>
+      <div className="containerMargin">
+        <Row className="mb-4 text-center rowHeader">
+          <h1 className="text-center">
             <u>HOW IT WORKS?</u>
           </h1>
         </Row>
         <br></br>
         <Row>
           <Col>
-            <Card
-              style={{ width: "18rem", marginLeft: "50%", height: "300px" }}
-            >
+            <Card className="cardColumn">
               <Card.Img variant="top" src={image1} />
               <Card.Body>
                 <Card.Title>Step 1</Card.Title>
@@ -82,12 +69,10 @@ function HowItWorks(props) {
             </Card>
           </Col>
           <Col>
-            <Card
-              style={{ width: "18rem", marginRight: "50%", height: "300px" }}
-            >
+            <Card className="cardColumn">
               <Card.Img variant="top" src={image2} />
               <Card.Body>
-                <Card.Title style={{ marginTop: "15px" }}>Step 2</Card.Title>
+                <Card.Title>Step 2</Card.Title>
                 <Card.Text>
                   Choose the image from your computer, press open to select.
                 </Card.Text>
@@ -98,14 +83,8 @@ function HowItWorks(props) {
         <br></br>
         <Row>
           <Col>
-            <Card
-              style={{ width: "18rem", marginLeft: "50%", height: "300px" }}
-            >
-              <Card.Img
-                variant="top"
-                src={image3}
-                style={{ height: "200px" }}
-              />
+            <Card className="cardColumn">
+              <Card.Img className="cardImage" variant="top" src={image3} />
               <Card.Body>
                 <Card.Title>Step 3</Card.Title>
                 <Card.Text>
@@ -115,12 +94,10 @@ function HowItWorks(props) {
             </Card>
           </Col>
           <Col>
-            <Card
-              style={{ width: "18rem", marginRight: "50%", height: "300px" }}
-            >
+            <Card className="cardColumn">
               <Card.Img variant="top" src={image4} />
               <Card.Body>
-                <Card.Title style={{ marginTop: "135px" }}>Step 4</Card.Title>
+                <Card.Title>Step 4</Card.Title>
                 <Card.Text>Check out different pages of the website.</Card.Text>
               </Card.Body>
             </Card>
