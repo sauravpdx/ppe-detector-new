@@ -1,17 +1,6 @@
-import React, { useState, useEffect } from "react";
-import {
-  Button,
-  Row,
-  Col,
-  Container,
-  Form,
-  Image,
-  Spinner,
-  Nav,
-  Navbar,
-} from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
-import { Auth } from "aws-amplify";
+import React from "react";
+import { Nav, Navbar, Container } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 
 function AppNavbar(props) {
   const { pathname } = useLocation();
@@ -27,7 +16,7 @@ function AppNavbar(props) {
             <Nav style={{ marginRight: "30%" }}>
               {
                 <Nav.Link
-                  active={pathname.includes("/")}
+                  active={pathname === "/" || pathname.includes("/home")}
                   style={{ marginRight: "30px" }}
                   href="/"
                 >
@@ -49,11 +38,17 @@ function AppNavbar(props) {
               >
                 How It Works?
               </Nav.Link>
+              <Nav.Link
+                active={pathname.includes("contact")}
+                style={{ marginRight: "30px" }}
+                href="/contact"
+              >
+                Contact Us
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {/* )} */}
     </Container>
   );
 }

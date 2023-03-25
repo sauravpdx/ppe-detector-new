@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import AppNavbar from "./components/AppNavbar";
 import AppRoutes from "./routes/AppRoutes";
